@@ -23,17 +23,31 @@ public class Calendar {
 
 	}
 
-	public void printCalendar(int year, int month) {
+	public void printCalendar(int year, int month, int weekday) {
 		System.out.printf("       <  %d년 %d월  >\n\n", year, month);
 		System.out.println(" SUN MON TUE WED THU FRI SAT");
 		System.out.println("----------------------------");
 
 		int maxDay = getMaxDaysOfMonth(year, month);
 
-		for (int i = 1; i <= maxDay; i++) {
-			System.out.printf("%4d", i);
+		// print blank space
+		for (int i = 0; i < weekday; i++) {
+			System.out.print("    ");
+		}
 
-			if (i % 7 == 0) {
+		// print first line
+		int count = 7 - weekday;
+		int delimit = count < 7 ? count : 0; // when you take a new line
+		for (int i = 1; i <= count; i++) {
+			System.out.printf("%4d", i);
+		}
+		System.out.println();
+
+		// print from second line to last line
+		count++;
+		for (int i = count; i <= maxDay; i++) {
+			System.out.printf("%4d", i);
+			if (i % 7 == delimit) {
 				System.out.println();
 			}
 		}
